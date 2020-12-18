@@ -1,4 +1,4 @@
-package crud;
+package crud.reader;
 
 import java.io.*;
 

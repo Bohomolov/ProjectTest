@@ -1,19 +1,23 @@
-import crud.FileReader;
+import crud.json.ReaderFromJSON;
+import crud.reader.FileReader;
 import crud.json.CreatorJSONFiles;
 import person.Factory;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Client {
-    public void run() throws IOException {
+    CreatorJSONFiles creatorFiles = new CreatorJSONFiles();
+    Factory personFactory = new Factory();
+    FileReader fileReader = new FileReader();
+    Scanner scanner = new Scanner(System.in);
+    ReaderFromJSON readerJSON = new ReaderFromJSON();
+
+    public void run(){
+
         while (true) {
+
             System.out.println("Enter command");
-            Scanner scanner = new Scanner(System.in);
             String command = scanner.nextLine();
-            CreatorJSONFiles creatorFiles = new CreatorJSONFiles();
-            Factory personFactory = new Factory();
-            FileReader fileReader = new FileReader();
 
             if (command.equalsIgnoreCase("create")) {
                 System.out.println("Enter file name");
@@ -25,6 +29,7 @@ public class Client {
                 System.out.println("Enter file name");
                 String fileName = scanner.nextLine();
                 fileReader.readFile(fileName);
+
             }
         }
     }
