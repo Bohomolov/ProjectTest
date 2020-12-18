@@ -1,16 +1,13 @@
 import crud.json.*;
 import crud.reader.FileReader;
-import person.Factory;
 import person.Person;
 
 import java.util.Scanner;
 
 public class Client {
     CreatorJSONFiles creatorFiles;
-    Factory personFactory = new Factory();
     FileReader fileReader = new FileReader();
     Scanner scanner = new Scanner(System.in);
-    ReaderFromJSON readerJSON = new ReaderFromJSON();
 
     private Executable executor;
 
