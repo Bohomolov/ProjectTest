@@ -1,4 +1,4 @@
-package crud.reader;
+package tmp;//временная папка
 
 import java.io.*;
 
@@ -8,6 +8,7 @@ public class FileReader {
         FileInputStream fileInputStream = null;
         InputStreamReader inputStreamReader = null;
         int bit = 0;
+
 
         try {
             fileInputStream = new FileInputStream(fileName);

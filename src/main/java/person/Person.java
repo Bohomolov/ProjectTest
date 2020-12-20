@@ -1,19 +1,14 @@
 package person;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private int age;
     private String city;
 
-    public int getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -35,6 +30,14 @@ public class Person {
         this.city = city;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
@@ -47,7 +50,16 @@ public class Person {
         return city;
     }
 
-
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", city='" + city + '\'' +
+                '}';
+    }
 
     public Person(int id, String firstName, String lastName, int age, String city) {
         this.id = id;
