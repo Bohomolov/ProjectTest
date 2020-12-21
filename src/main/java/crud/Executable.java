@@ -2,16 +2,14 @@ package crud;
 
 import person.Person;
 
-import java.io.File;
 import java.util.List;
 
 public interface Executable {
-    boolean write( String fileName, List<Person> arrayList); // create;
+    boolean write( String fileName, List<Person> arrayList);
 
-    //  List<Person> read(Person person); // read;
-    List<Person> read(String fileName); // read; Person[] array;
+    List<Person> read(String fileName);
 
-    boolean update(Person person, String fileName); // update;
+    List<Person> update(List<Person> arrayList);
 
-    boolean delete(int id); // delete
+    boolean delete(int id,List<Person> arrayList);
 }

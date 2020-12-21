@@ -2,12 +2,15 @@ package person;
 
 import java.io.Serializable;
 
-public class Person implements Serializable {
+import java.util.List;
+
+public class Person implements Serializable, Container {
     private int id;
     private String firstName;
     private String lastName;
     private int age;
     private String city;
+    private List<Person> arrayList;
 
 
     public void setId(int id) {
@@ -67,5 +70,27 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.age = age;
         this.city = city;
+    }
+
+    @Override
+    public Iterator getIterator() {
+        return new DataIterator();
+    }
+
+    private class DataIterator implements Iterator {
+        int index;
+
+        @Override
+        public boolean hasNext() {
+            return (index < arrayList.size()) ? true : false;
+        }
+
+        @Override
+        public Object next() {
+            if (hasNext()) {
+//                return arrayList[index];
+            }
+            return true;
+        }
     }
 }

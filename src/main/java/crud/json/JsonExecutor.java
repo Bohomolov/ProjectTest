@@ -7,20 +7,23 @@ import crud.Executable;
 import person.Person;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class JsonExecutor implements Executable {
     private final Gson gsonBuilder;
     private Gson gson;
     private FileWriter fileWriter;
-    private ArrayList<Person> arrayList;
-
+    private Scanner scanner;
+    private List<Person> arrayList;
+    private FileInputStream fileInputStream = null;
+    private InputStreamReader inputStreamReader = null;
 
     public JsonExecutor() {
         gsonBuilder = new GsonBuilder().setPrettyPrinting().create();
         gson = new Gson();
         fileWriter = null;
+        scanner = new Scanner(System.in);
     }
 
     public boolean write(String fileName, List<Person> arrayList) {
@@ -51,15 +54,13 @@ public class JsonExecutor implements Executable {
     }
 
     public List<Person> read(String fileName) {
-        FileInputStream fileInputStream = null;
-        InputStreamReader inputStreamReader = null;
         int bit = 0;
         String output = "";
         try {
             fileInputStream = new FileInputStream(fileName);
             inputStreamReader = new InputStreamReader(fileInputStream, "UTF8");
             while ((bit = inputStreamReader.read()) != -1) {
-                output+=(char) bit;
+                output += (char) bit;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -83,22 +84,17 @@ public class JsonExecutor implements Executable {
         }.getType());
     }
 
-    public boolean update(Person newPerson, String fileName) {
-        ArrayList<Person> arrayList = (ArrayList<Person>) read(fileName);
-        for (Person oldPerson : arrayList) {
-            if (newPerson.getId() == oldPerson.getId()) {
-                oldPerson.setFirstName(newPerson.getFirstName());
-                oldPerson.setLastName(newPerson.getLastName());
-                oldPerson.setAge(newPerson.getAge());
-                String newCityValue = newPerson.getCity();
-                oldPerson.setCity(newCityValue);
-                break;
-            }
-        }
-        return false;
+    public List<Person> update(List<Person> arrayList) {
+
+        System.out.println("Enter file name");
+        String fileName = scanner.nextLine();
+        List<Person> tmpList = read(fileName);
+        arrayList.addAll(tmpList);
+        return arrayList;
     }
 
-    public boolean delete(int id) {
+    public boolean delete(int id, List<Person> arrayList) {
+        arrayList.remove(id);
         return false;
     }
 }

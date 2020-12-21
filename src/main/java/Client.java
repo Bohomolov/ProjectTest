@@ -1,7 +1,7 @@
 
 public class Client {
     public static void main(String[] args) {
-        Controller controller = new Controller();
+        AppController controller = new AppController();
         controller.run();
     }
 }
