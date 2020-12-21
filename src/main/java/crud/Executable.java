@@ -9,7 +9,7 @@ public interface Executable {
 
     List<Person> read(String fileName);
 
-    List<Person> update(List<Person> arrayList);
+    List<Person> update(List<Person> arrayList,String fileName);
 
-    boolean delete(int id,List<Person> arrayList);
+    List<Person> delete(int id,List<Person> arrayList);
 }

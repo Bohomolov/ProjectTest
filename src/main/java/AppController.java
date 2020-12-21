@@ -1,5 +1,6 @@
 import crud.Executable;
 import crud.json.*;
+import crud.string.impl.JsonStringConverter;
 import person.Person;
 
 import java.util.ArrayList;
@@ -11,20 +12,18 @@ public class AppController {
     private final Scanner scanner;
     private List<Person> arrayList;
     private Executable executor;
+    private String fileName;
 
 
     public AppController() {
         scanner = new Scanner(System.in);
-
+        arrayList = new ArrayList<>();
     }
 
     public void run() {
-        arrayList = new ArrayList<>();
+        changeFormat();
         while (true) {
-            changeFormat();
-
             System.out.println("Enter command");
-
             String command = scanner.nextLine();
 
             if (command.equalsIgnoreCase("create")) {//итератор
@@ -33,8 +32,7 @@ public class AppController {
             } else if (command.equalsIgnoreCase("exit")) {
                 System.exit(0);
             } else if (command.equalsIgnoreCase("read")) {
-                System.out.println("Enter file name");
-                String fileName = scanner.nextLine();
+
                 if (fileName.equalsIgnoreCase("switch")) {
                     changeFormat();
                 }
@@ -48,16 +46,20 @@ public class AppController {
             } else if (command.equalsIgnoreCase("save")) {
                 save(arrayList);
             } else if (command.equalsIgnoreCase("update")) {
-                executor.update(arrayList);
-            }else if (command.equalsIgnoreCase("delete")){
+                executor.update(arrayList, fileName);
+            } else if (command.equalsIgnoreCase("delete")) {
+
+                List<Person> personList = executor.read(fileName);
                 System.out.println("Enter id");
                 int id = scanner.nextInt();
-                executor.delete(id,arrayList);
+                executor.delete(id, personList);
             }
         }
     }
 
     public void changeFormat() {
+        System.out.println("Enter file name");
+        fileName = scanner.nextLine();
         System.out.println("Choose format");
         String newFormat = scanner.nextLine();
         switch (newFormat) {
@@ -65,7 +67,7 @@ public class AppController {
 //                executor = new BinaryExecutor();
 //                break;
             case "json":
-                executor = new JsonExecutor();
+                executor = new StringFormatExecutor(new JsonStringConverter());
                 break;
 //            case "csv":
 //            executor = new CsvExecutor();
@@ -94,10 +96,7 @@ public class AppController {
                 array[4]);
         arrayList.add(person);
     }
-
     private void save(List<Person> arrayList) {
-        System.out.println("Enter file name");
-        String fileName = scanner.nextLine();
         executor.write(fileName, arrayList);
     }
 }

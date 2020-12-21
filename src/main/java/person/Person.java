@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import java.util.List;
 
-public class Person implements Serializable, Container {
+public class Person implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
@@ -72,25 +72,4 @@ public class Person implements Serializable, Container {
         this.city = city;
     }
 
-    @Override
-    public Iterator getIterator() {
-        return new DataIterator();
-    }
-
-    private class DataIterator implements Iterator {
-        int index;
-
-        @Override
-        public boolean hasNext() {
-            return (index < arrayList.size()) ? true : false;
-        }
-
-        @Override
-        public Object next() {
-            if (hasNext()) {
-//                return arrayList[index];
-            }
-            return true;
-        }
-    }
 }
