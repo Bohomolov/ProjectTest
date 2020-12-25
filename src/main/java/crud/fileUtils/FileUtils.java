@@ -23,6 +23,23 @@ public class FileUtils {
         return true;
     }
 
+    public boolean createFile(String fileName) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean isFileEmpty(String fileName){
+        File file = new File(fileName);
+        return file.length() == 0;
+    }
+
     public String readFromFile(String fileName) {
         int bit = 0;
         String output = "";

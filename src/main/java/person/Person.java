@@ -2,16 +2,12 @@ package person;
 
 import java.io.Serializable;
 
-import java.util.List;
-
 public class Person implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private int age;
     private String city;
-    private List<Person> arrayList;
-
 
     public void setId(int id) {
         this.id = id;

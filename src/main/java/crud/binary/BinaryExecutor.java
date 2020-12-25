@@ -22,10 +22,10 @@
 //        try {
 //            InputStream xz1 = new FileInputStream("resources/binary.dat");
 //            ObjectInputStream xz2 = new ObjectInputStream(xz1);
-////            while (true) {
-////                xz2.read();
-////            }
-////            arrayList =
+//            while (true) {
+//                xz2.read();
+//            }
+//            arrayList =
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
