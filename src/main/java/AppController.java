@@ -15,6 +15,7 @@ import static crud.fileUtils.Constants.*;
 public class AppController {
     private final Scanner scanner;
     private List<Person> arrayList;
+    private List<Person> tempList;
     private Executable executor;
     private FileUtils fileUtils;
     private String fileName;
@@ -40,11 +41,11 @@ public class AppController {
                     changeFormat();
                 }
                 if (!fileUtils.isFileEmpty(fileName)) {
-                    arrayList = executor.read(fileName);
+                     tempList = executor.read(fileName);
                 } else {
                     System.out.println(FILE_IS_EMPTY);
                 }
-                for (Person p : arrayList) {
+                for (Person p :tempList) {
                     System.out.println(p);
                 }
 
@@ -103,12 +104,6 @@ public class AppController {
     }
 
     private void creator() {
-        if (!fileUtils.isFileEmpty(fileName)) {
-            arrayList = executor.read(fileName);
-
-        } else {
-            arrayList = new ArrayList<>();
-        }
         System.out.println(Constants.ENTER_PERSON_DATA);
         String personData = scanner.nextLine();
         String[] array = personData.split(" ");
@@ -118,16 +113,16 @@ public class AppController {
                 array[2],
                 Integer.parseInt(array[3]),
                 array[4]);
-        Iterator<Person> iterator = arrayList.iterator();
-        while (iterator.hasNext()) {
-            Person iterPerson = iterator.next();
-            if (iterPerson.getId() == person.getId()) {
-                System.out.println(ILLEGAL_PERSON_ID);
-                break;
-            } else {
+
+        if (!fileUtils.isFileEmpty(fileName)) {
+            arrayList = executor.read(fileName);
+            if (fileUtils.isIdLegal(arrayList, person)) {
                 arrayList.add(person);
                 System.out.println(PERSON_WAS_CREATE);
             }
+        } else {
+            arrayList.add(person);
+            System.out.println(PERSON_WAS_CREATE);
         }
     }
 

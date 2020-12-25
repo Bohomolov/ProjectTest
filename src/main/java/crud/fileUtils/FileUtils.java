@@ -1,6 +1,13 @@
 package crud.fileUtils;
 
+import person.Person;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import static crud.fileUtils.Constants.ILLEGAL_PERSON_ID;
 
 public class FileUtils {
 
@@ -39,6 +46,18 @@ public class FileUtils {
         File file = new File(fileName);
         return file.length() == 0;
     }
+    public boolean isIdLegal(List<Person> arrayList, Person person){
+        Iterator<Person> iterator = arrayList.iterator();
+        while (iterator.hasNext()) {
+            Person iterPerson = iterator.next();
+            if (iterPerson.getId() == person.getId()) {
+                System.out.println(ILLEGAL_PERSON_ID);
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public String readFromFile(String fileName) {
         int bit = 0;
