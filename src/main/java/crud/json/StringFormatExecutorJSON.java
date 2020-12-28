@@ -1,5 +1,6 @@
 package crud.json;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import crud.Executable;
 import crud.fileUtils.Constants;
 import crud.fileUtils.FileUtils;
@@ -24,24 +25,29 @@ public class StringFormatExecutorJSON implements Executable {
         scanner = new Scanner(System.in);
     }
 
-    public boolean write(String fileName, List<Person> arrayList) {
+    public boolean write(String fileName, List<Person> arrayList) throws JsonProcessingException {
         String content = personStringConverter.personToString(arrayList);
         arrayList.clear();
         return fileUtils.saveToFile(fileName, content);
     }
 
-    public List<Person> read(String fileName) {
+    public List<Person> read(String fileName) throws JsonProcessingException {
         String output = fileUtils.readFromFile(fileName);
         return personStringConverter.stringToPerson(output);
     }
 
     public List<Person> update(List<Person> arrayList, int id) {
         Iterator<Person> iterator = arrayList.iterator();
+
         System.out.println(ENTER_PERSON_DATA_UPDATE);
         String personData = scanner.nextLine();
+
         String[] array = personData.split(" ");
+
         while (iterator.hasNext()){
+
             Person iterPerson = iterator.next();
+
             if (iterPerson.getId() == id){
                 iterPerson.setFirstName(array[0]);
                 iterPerson.setLastName(array[1]);
@@ -55,9 +61,13 @@ public class StringFormatExecutorJSON implements Executable {
     }
 
     public List<Person> delete(int id, List<Person> arrayList) {
+
         Iterator<Person> iterator = arrayList.iterator();
+
         while (iterator.hasNext()){
+
             Person iterPerson = iterator.next();
+
             if (iterPerson.getId() == id){
                 iterator.remove();
                 break;

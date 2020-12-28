@@ -9,6 +9,7 @@ public class Person implements Serializable {
     private int age;
     private String city;
 
+
     public void setId(int id) {
         this.id = id;
     }

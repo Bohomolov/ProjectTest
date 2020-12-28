@@ -3,7 +3,6 @@ package crud.fileUtils;
 import person.Person;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,14 +12,6 @@ public class FileUtils {
 
     public boolean saveToFile(String fileName, String content) {
         File file = new File(fileName);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
         try (FileWriter fileWriter = new FileWriter(file,false)) {
             fileWriter.write(content);
         } catch (IOException e) {
